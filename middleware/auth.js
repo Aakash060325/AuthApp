@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 export const auth=async(req,res,next)=>{
 
     
-        const authorization=req.headers.authorization;
+        const authorization=req.cookies.token;
 
 if(!authorization){
     return res.status(401).json({message:"authorization token missing"});
