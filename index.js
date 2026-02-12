@@ -5,6 +5,9 @@ import userRouter from "./routes/userRoute.js";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
+import cookieParser from "cookie-parser";
+
+app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 

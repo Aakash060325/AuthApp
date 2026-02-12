@@ -22,4 +22,9 @@ name:name
 })  
 });
 
+router.post("/logout",(req,res)=>{
+    res.clearCookie("token");
+    res.json({message:"logout successfully"});
+})
+
 export default router;

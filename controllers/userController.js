@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import User from "../models/user.js";
 
+
 export const register=async(req,res)=>{
     const {email,password}=req.body;
     try {
@@ -41,7 +42,16 @@ try {
         return res.status(401).json({message:"invalid password"});
     }
     const token=jwt.sign({id:check._id},process.env.JWT_SECRET,{expiresIn:"1h"});
-    res.status(200).json({message:"login successful",token:token});
+    res.cookie("token",token,{
+        httpOnly:true,
+        secure:false,
+        sameSite:"strict",
+        maxAge:60*60*1000
+    })
+
+
+
+    res.status(200).json({message:"login successful"});
 } catch (error) {
     return res.status(500).json({error:error.message});
 }
